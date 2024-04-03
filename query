@@ -1,0 +1,20 @@
+CREATE TABLE cust1 (namev VARCHAR(50), phone_no NUMBER(10),address VARCHAR(50));
+INSERT INTO cust1 VALUES ('raj', 9456734678, 'chennai');
+INSERT INTO cust1 VALUES ('rani', 7685945067, 'chennai');
+SELECT * FROM cust1;
+
+CREATE OR REPLACE FUNCTION search(n IN NUMBER) RETURN VARCHAR2 IS temp VARCHAR2(50);
+
+BEGIN
+SELECT address INTO temp FROM cust1 WHERE phone_no = n;
+RETURN temp;
+END;
+
+DECLARE
+op VARCHAR2(50);
+ip NUMBER(10) := 9456734678; -- Assigning a phone number to search
+
+BEGIN
+op := search(ip);
+DBMS_OUTPUT.put_line('Address: ' || op);
+END;
